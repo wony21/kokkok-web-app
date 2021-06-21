@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, CssBaseline } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { 
-    Typography, Button, TextField, makeStyles, FormControl, FormControlLabel, Checkbox } from '@material-ui/core';
+    Grid, Typography, Button, TextField, makeStyles, FormControl, FormControlLabel, Checkbox, Link } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +29,10 @@ const useStyles = makeStyles((theme) => ({
     },
     txtpw: {
         width: '100%',
-    }
+    },
+    bottom: {
+        margin: theme.spacing(1),
+    },
 }));   
 
 export default function Login() {
@@ -61,9 +64,35 @@ export default function Login() {
                         label="Remember me"
                         />
                     <Button 
-                        variant="contained">
+                        variant="contained"
+                        color="primary"
+                        >
                         로그인
                     </Button>
+                    <Grid container>
+                        <Grid className={classes.bottom} item>
+                            <Link 
+                                href="#" 
+                                variant="body2"
+                                onClick={() => {
+                                    console.log('Find password click!');
+                                }}
+                                >
+                                비밀번호가 기억나지 않으세요?
+                            </Link>
+                        </Grid>
+                        <Grid className={classes.bottom} item>
+                            <Link 
+                                href="#" 
+                                variant="body2"
+                                onClick={() =>{
+                                    console.log('Create account click!');
+                                }}
+                                >
+                                회원이 아직 아니시라고요?
+                            </Link>
+                        </Grid>
+                    </Grid>
                 </FormControl>
             </div>
         </Container>
