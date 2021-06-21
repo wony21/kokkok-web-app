@@ -24,14 +24,12 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         // backgroundColor: theme.palette.secondary.main,
     },
-    txtid: {
+    inputfield: {
         width: '100%',
-    },
-    txtpw: {
-        width: '100%',
+        marginTop: theme.spacing(1),
     },
     bottom: {
-        margin: theme.spacing(1),
+        marginTop: theme.spacing(1),
     },
 }));   
 
@@ -50,13 +48,15 @@ export default function Login() {
                 </Typography>
                 <FormControl className={classes.form}>
                     <TextField 
-                        className={classes.txtid} 
+                        className={classes.inputfield} 
                         id="txt-user-id" 
+                        variant="outlined"
                         label="아이디" />
                     <TextField 
-                        className={classes.txtpw} 
+                        className={classes.inputfield} 
                         id="txt-password" 
-                        label="Password" 
+                        variant="outlined"
+                        label="비밀번호" 
                         type="Password" 
                         autoComplete="current-password" />
                     <FormControlLabel 
