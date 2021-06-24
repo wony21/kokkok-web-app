@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, CssBaseline } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import PanToolIcon from '@material-ui/icons/PanTool';
 import { 
-    Grid, Typography, Button, TextField, makeStyles, FormControl, FormControlLabel, Checkbox, Link } from '@material-ui/core';
+    Container, CssBaseline, Grid, Typography, Button, TextField, makeStyles, 
+    FormControl, FormControlLabel, Checkbox, Link, CircularProgress } from '@material-ui/core';
+import { green, red } from '@material-ui/core/colors';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
     bottom: {
         marginTop: theme.spacing(1),
     },
+    errortype: {
+        fontSize: 28,
+        color: red[300]
+    }
 }));   
 
 export default function Login() {
@@ -41,6 +47,8 @@ export default function Login() {
     const [error, setError] = useState(null);
     const [userid, setUserId] = useState(null);
     const [password, setPassword] = useState(null);
+    const [message, setMessage] = useState(null);
+    const [loginFg, setLoginFg] = useState(null);
 
     function handleUserIdInput(event) {
         setUserId(event.currentTarget.value);
@@ -52,34 +60,34 @@ export default function Login() {
 
     const RequestLogin = async () => {
         try {
-            // 
+            // 초기화
             setError(null);
             setLoginInfo(null);
             setLoading(true);
-
-            console.log('request login..');
-            console.log(`${userid}, ${password}`);
-
-            const response = await axios.post('http://localhost:25021/login/request', 
-                        {userId: userid, password: password});
-
-            console.log('reponse..');
-
-            setLoading(false);
-
+            setMessage('로그인 요청 중 입니다...');
+            // 
+            const response = await axios.post('http://localhost:25021/login/request', { userId: userid, password: password });
+            // response
+            console.log('-- response --');
             console.log(response.data);
 
-            setLoginInfo(response.data);
+            var auth = response.data.login;
+            console.log(auth);
+            if (auth) {
+                setLoginFg('true');
+                setLoginInfo(response.data.userInfo.userId);
+            } else {
+                setLoginFg('false');
+                setError(true);
+                setMessage('로그인 인증에 실패 하였습니다.');
+            }
+            setLoading(null);
 
         } catch (e) {
             setError(e);
         }
     }
-
-    if (loading) return <div>로그인 중...</div>;
-
-    if (error) return <div>에러가 발생 되었습니다.</div>;
-
+    
     return (
         <Container maxWidth="sm">
             <CssBaseline />
@@ -139,11 +147,24 @@ export default function Login() {
                                 회원이 아직 아니시라고요?
                             </Link>
                         </Grid>
-                        <Grid className={classes.bottom} item>
-                            <Typography component="h1" variant="h5">
-                                
-                            </Typography>
-                        </Grid>
+                        <div>
+                            {
+                                {
+                                    true:
+                                        <Grid className={classes.bottom} item>        
+                                            <Typography component="h1" variant="h5">
+                                                {message}
+                                            </Typography>
+                                        </Grid>,
+                                    false:
+                                        <Grid className={classes.bottom} item>        
+                                            <Typography component="h1" variant="h5">
+                                                {message}
+                                            </Typography>
+                                        </Grid>,
+                                }[loginFg]
+                            }
+                        </div>
                     </Grid>
                 </FormControl>
             </div>
