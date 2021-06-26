@@ -26,7 +26,7 @@ export default function TopControl() {
             <CssBaseline />
             <Grid container>
                 <Grid item>
-                    <TextField id="standard-search" label="KOKKOK" type="search" />
+                    <TextField id="standard-search" label="상품을 검색하세요" type="search" />
                 </Grid>
                 <Grid item>
                     <AccountCircleIcon style={{fontSize:48, color:red}}></AccountCircleIcon>  
