@@ -1,37 +1,41 @@
 import React, { useState } from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import imgLogo from '../../KokKok_LOGO.png';
 import { 
     Container, CssBaseline, Grid, Typography, Button, TextField, makeStyles, 
-    FormControl, FormControlLabel, Checkbox, Link, CircularProgress, Box } from '@material-ui/core';
+    FormControl, FormControlLabel, Checkbox, Link, CircularProgress, Box, AppBar, IconButton, Toolbar } from '@material-ui/core';
 import { green, red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
-
-    container: {
-        width: '100%'
+    root: {
+        flexGrow: 1,    
     },
-
-    menu_grid: {
-        
-    }
-    
-}));   
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        flexGrow: 1,
+    },
+}));
 
 export default function TopControl() {
     const classes = useStyles();
     
     return (
-        <Box>
+        <div className={classes.root}>
             <CssBaseline />
-            <Grid container>
-                <Grid item>
-                    <TextField id="standard-search" label="상품을 검색하세요" type="search" />
-                </Grid>
-                <Grid item>
-                    <AccountCircleIcon style={{fontSize:48, color:red}}></AccountCircleIcon>  
-                </Grid>
-            </Grid>
-        </Box>
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" className={classes.title}>
+                        News
+                    </Typography>
+                    <Button color="inherit">Login</Button>
+                </Toolbar>
+            </AppBar>
+        </div>
     );
 }
