@@ -29,7 +29,7 @@ export default function TopControl() {
                     <TextField id="standard-search" label="KOKKOK" type="search" />
                 </Grid>
                 <Grid item>
-                    <AccountCircleIcon style={{fontSize:32, color:red}}></AccountCircleIcon>  
+                    <AccountCircleIcon style={{fontSize:48, color:red}}></AccountCircleIcon>  
                 </Grid>
             </Grid>
         </Box>
