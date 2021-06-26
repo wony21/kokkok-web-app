@@ -6,7 +6,7 @@ import { Container } from '@material-ui/core';
 function App() {
   return (
     <Container maxWidth="md">
-      <TopControl />
+      <Login />
     </Container>
   );
 }
