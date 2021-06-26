@@ -66,7 +66,7 @@ export default function Login() {
             setLoading(true);
             setMessage('로그인 요청 중 입니다...');
             // 
-            const response = await axios.post('http://localhost:25021/login/request', { userId: userid, password: password });
+            const response = await axios.post('http://172.31.20.17:25021/login/request', { userId: userid, password: password });
             // response
             console.log('-- response --');
             console.log(response.data);
